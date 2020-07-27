@@ -1,13 +1,19 @@
-// Write your JavaScript code here!
-
-/* This block of code shows how to format the HTML once you fetch some planetary JSON!
-<h2>Mission Destination</h2>
-<ol>
-   <li>Name: ${"Jupiter/Europa"}</li>
-   <li>Diameter: ${"3,121.6 km"}</li>
-   <li>Star: ${"Sol"}</li>
-   <li>Distance from Earth: ${"628.3 million km from Earth"}</li>
-   <li>Number of Moons: ${0}</li>
-</ol>
-<img src="${"https://apod.nasa.gov/apod/image/1609/Europa_Galileo_960.jpg"}">
-*/
+window.addEventListener("load", function () {
+   fetch("https://handlers.education.launchcode.org/static/planets.json").then(function (response) {
+      response.json().then(function (json) {
+         const destination = document.getElementById("missionTarget");
+         destination.innerHTML =
+            `
+   <h2>Mission Destination</h2>
+      <ol>
+        <li>Name: ${json[5].name}</li>
+        <li>Diameter: ${json[5].diameter}</li>
+        <li>Star: ${json[5].star}</li>
+        <li>Distance from Earth: ${json[5].distance}</li>
+        <li>Number of Moons: ${json[5].moons}</li>
+      </ol>
+         <img src="${json[5].image}">
+      `;
+      })
+   });
+});
