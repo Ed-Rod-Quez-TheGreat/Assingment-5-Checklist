@@ -48,6 +48,18 @@ window.addEventListener("load", function() {
          fuelLevel.value === "" || cargoMass.value === "") {
          alert("All fields are required!");
          event.preventDefault();
+      } else if  ((isNaN(fuelLevel.value) === true)) {
+         alert("Please enter fuel as a numeric value")
+         event.preventDefault();   
+      } else if  ((isNaN(cargoMass.value) === true)) {
+         alert("Please enter cargo as a numeric value")
+         event.preventDefault();    
+      } else if  ((isNaN(pilotName.value) === false)) {
+         alert("Please enter pilot name with letters only")
+         event.preventDefault();   
+      } else if  ((isNaN(copilotName.value) === false)) {
+         alert("Please enter copilot name with letters only")
+         event.preventDefault();                             
       };
    });
 });
