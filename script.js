@@ -32,18 +32,31 @@ window.addEventListener("load", function() {
          fuelLevel.value === "" || cargoMass.value === "") {
          alert("All fields are required!");
          event.preventDefault();
-      } else if  ((isNaN(fuelLevel.value) === true)) {
-         alert("Please enter fuel as a numeric value")
-         event.preventDefault();   
-      } else if  ((isNaN(cargoMass.value) === true)) {
-         alert("Please enter cargo as a numeric value")
-         event.preventDefault();    
-      } else if  ((isNaN(pilotName.value) === false)) {
-         alert("Please enter pilot name with letters only")
-         event.preventDefault();   
-      } else if  ((isNaN(copilotName.value) === false)) {
-         alert("Please enter copilot name with letters only")
-         event.preventDefault();                             
-      };
+      } else if (Number(fuelLevel.value) < 10000) {
+         document.getElementById("faultyItems").style.visibility = "visible"
+         document.getElementById("launchStatus").style.color = "red";
+         document.getElementById("launchStatus").innerHTML = "Shuttle not ready for launch"
+         document.getElementById("fuelStatus").innerHTML = "Not enough fuel for launch"
+         if (Number(cargoMass.value) > 10000) {
+            document.getElementById("cargoStatus").innerHTML = "There is  too much mass for the shuttle to take off"
+         }
+         event.preventDefault();
+      
+      } else if (Number(cargoMass.value) > 10000) {
+         document.getElementById("faultyItems").style.visibility = "visible"
+         document.getElementById("launchStatus").style.color = "red"; 
+         document.getElementById("launchStatus").innerHTML = "Shuttle not ready for launch"
+         document.getElementById("cargoStatus").innerHTML = "There is  too much mass for the shuttle to take off"
+         event.preventDefault();
+
+      } else {
+         document.getElementById("faultyItems").style.visibility = "visible"
+         document.getElementById("launchStatus").style.color = "green"; 
+         document.getElementById("pilotStatus").innerHTML = `Pilot ${pilotName.value} Ready`
+         document.getElementById("copilotStatus").innerHTML = `Co-Pilot  ${copilotName.value} Ready`
+         document.getElementById("launchStatus").innerHTML = "Shuttle ready for launch"
+         event.preventDefault();
+      }
+
    });
 });
